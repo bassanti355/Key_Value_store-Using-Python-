@@ -1,0 +1,14 @@
+[
+    {
+        "id": 3,
+        "product_name": "Bread - Whole Wheat",
+        "quantity": 10,
+        "price": 15.0
+    },
+    {
+        "id": 4,
+        "product_name": "Milk - Skim",
+        "quantity": 6,
+        "price": 18.75
+    }
+]

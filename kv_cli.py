@@ -1,6 +1,6 @@
 import argparse
 import time
-from kvstore.engine import KVEngine
+from key_value_store.kvstore.engine import KVEngine
 
 def parse_path_key_value(string):
     parts = string.split(":")
@@ -22,7 +22,7 @@ def parse_path(string):
 
 def interactive_shell():
     """Interactive shell for continuous command execution."""
-    db = KVEngine()
+    db = KVEngine("./test_db/")
     print("Entering interactive shell. Type 'exit' to quit.")
     
     while True:
@@ -54,6 +54,7 @@ def interactive_shell():
                     print(f"[ERROR] Namespace {ns} does not exist.")
                 else:
                     print(db.list_tables(db.current_namespace))
+
             elif command.startswith("create-table"):
                 parts = command.split(" ")
                 tbl = parts[1]
@@ -101,10 +102,12 @@ def interactive_shell():
                 tbl = command.split(" ")[1]
                 db.flush_table(tbl)
                 print(f"[OK] Flushed {db.current_namespace}:{tbl} to disk.")
+
             elif command.startswith("compact"):
                 tbl = command.split(" ")[1]
                 db.compact_table(tbl)
                 print(f"[OK] Compacted {db.current_namespace}:{tbl} into one file.")
+                
             else:
                 print("Unknown command. Try again.")
         except Exception as e:
