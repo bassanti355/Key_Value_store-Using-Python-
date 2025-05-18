@@ -54,7 +54,6 @@ def interactive_shell():
                     print(f"[ERROR] Namespace {ns} does not exist.")
                 else:
                     print(db.list_tables(db.current_namespace))
-
             elif command.startswith("create-table"):
                 parts = command.split(" ")
                 tbl = parts[1]

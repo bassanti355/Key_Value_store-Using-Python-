@@ -71,23 +71,18 @@ class KVEngine:
                 tables.append(tbl)
         return tables
     
-    def table_exists(self, tbl):
+    def table_exists(self, namespace, tbl):
         """Check if a table exists in the current namespace."""
-        namespace_dir = os.path.join(self.db_path, self.current_namespace)
-        for files in os.listdir(namespace_dir):
-            if os.path.isdir(os.path.join(namespace_dir, files)):
-                if files == tbl:
-                    return True
-        return False
+        return os.path.exists(os.path.join(self.db_path, namespace, tbl))
+
 
     def current_table(self,tbl):
         """Get the current table."""
         self.current_table = tbl
 
-
-    def create_table(self, tbl):
+    def create_table(self, namespace, tbl):
         """Create a new table in the current namespace."""
-        namespace_dir = os.path.join(self.db_path, self.current_namespace)
+        namespace_dir = os.path.join(self.db_path, namespace)
         os.mkdir(os.path.join(namespace_dir, tbl))
 
     def flush_table(self, tbl):
